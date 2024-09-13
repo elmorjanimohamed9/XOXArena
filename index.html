@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe app</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- 'Play' font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div id="overlay">
+        <div id="message">
+            <div id="close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div id="content"><i class="fa-solid fa-xmark"></i> is the <h2> Winner! </h2></div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="tools">
+            <div class="symbols">
+                <i class="fa-solid fa-xmark xmark-color fa-lg"></i>
+                <i class="fa-regular fa-circle circle-color"></i>
+            </div>
+            <div class="turn">
+                <span class="current-turn"></span>TURN
+            </div>
+            <div class="reset">
+                <div class="buttton">
+                    <i class="fa-solid fa-arrow-rotate-left fa-lg color"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="board">
+            <div class="cells">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="cells">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="cells">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="player1">
+                <label>Player 1</label>
+                <span class="score1">0</span>
+            </div>
+            <div class="draws">
+                <label>Draws</label>
+                <span class="draw">0</span>             
+            </div>
+            <div class="player2">
+                <label>Player 2</label>
+                <span class="score2">0</span>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
