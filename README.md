@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**MediaGame** is an online gaming start-up aiming to enhance user experiences by offering new and exciting games. This project is a web-based Tic Tac Toe game with an expanded 20x20 board, allowing two players to compete in a larger grid. The game is built using HTML, CSS, and JavaScript, and stores data in local storage.
+**MediaGame** is an online gaming start-up aiming to enhance user experiences by offering new and exciting games. This project is a web-based Tic Tac Toe game with an expanded 3x3 board, allowing two players to compete in a larger grid. The game is built using HTML, CSS, and JavaScript, and stores data in local storage.
 
 ## Features
 
