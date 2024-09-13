@@ -10,7 +10,7 @@ Here's a sample README for your Tic Tac Toe 20x20 game project that you can use 
 
 ## Features
 
-- **Game Board**: A 20x20 grid where players can place their symbols.
+- **Game Board**: A 3x3 grid where players can place their symbols.
 - **Player Turns**: Player 1 (X) starts, and players alternate turns.
 - **Winning Condition**: A player wins by aligning 5 of their symbols in a row, column, or diagonal.
 - **Game Status**: Detects and announces the winner or a draw when the board is full.
