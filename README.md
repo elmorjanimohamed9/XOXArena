@@ -1,7 +1,3 @@
-Here's a sample README for your Tic Tac Toe 20x20 game project that you can use for your GitHub repository:
-
----
-
 # Tic Tac Toe 3x3
 
 ## Project Overview
