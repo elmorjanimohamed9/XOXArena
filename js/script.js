@@ -69,20 +69,6 @@ function saveGameData() {
     localStorage.setItem('ticTacToeGameData', JSON.stringify(gameData));
 }
 
-function check(){
-    let score1 = player1.score;
-    let score2 = player2.score;
-    if(score1 + score2 >= 5){
-        checkWinner();
-        if(score1 > score2){
-            alert('player 1 is the winner!')
-        }else{
-            alert('player 2 is the winner!')
-        }
-        
-    }
-    reset();
-}
 
 function loadGameData() {
     const savedData = localStorage.getItem('ticTacToeGameData');
