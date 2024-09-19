@@ -19,7 +19,7 @@ let ties = 0;
 let checkwin = 0;
 
 const winningCombos = [
-   
+
     [0, 1, 2, 3, 4],
     [5, 6, 7, 8, 9],
     [10, 11, 12, 13, 14],
@@ -53,6 +53,7 @@ checkTurn();
 
 
 function saveGameData() {
+
     const gameData = {
         player1: {
             score: player1.score,
@@ -71,33 +72,32 @@ function saveGameData() {
 
 
 function loadGameData() {
+
     const savedData = localStorage.getItem('ticTacToeGameData');
 
     if (savedData) {
+
         const gameData = JSON.parse(savedData);
 
         player1.score = gameData.player1.score;
         player1.played = gameData.player1.played;
-
         player2.score = gameData.player2.score;
         player2.played = gameData.player2.played;
-
         turn = gameData.turn;
         ties = gameData.ties;
         useCells = gameData.useCells;
 
+        cells.forEach((cell, index) => {
+            if (player1.played.includes(index)) {
+                cell.innerHTML = player1.icon;
+            } else if (player2.played.includes(index)) {
+                cell.innerHTML = player2.icon;
+            }
+        });
+
+        showScore();
+        checkTurn();
     }
-
-    cells.forEach((cell, index) => {
-        if (player1.played.includes(index)) {
-            cell.innerHTML = player1.icon;
-        } else if (player2.played.includes(index)) {
-            cell.innerHTML = player2.icon;
-        }
-    });
-
-    showScore();
-    checkTurn();
 }
 
 
@@ -172,7 +172,7 @@ function reset() {
     checkTurn();
     saveGameData();
 
-};
+}
 
 function checkTurn() {
     if (turn) {
@@ -180,13 +180,14 @@ function checkTurn() {
     } else {
         currentTurn.innerHTML = player2.icon;
     }
-};
+}
+
 
 function showScore() {
     player1score.innerHTML = player1.score;
     player2score.innerHTML = player2.score;
     draw.innerHTML = ties;
-};
+}
 
 function displayMessage(player, isDraw = false) {
     overlay.style.display = 'flex';
@@ -228,21 +229,22 @@ for (let i = 0; i < cells.length; i++) {
                 setIcon(player1, cells[i], i);
                 turn = false;
                 checkWinner(player1);
-                checkTurn();
 
             } else {
 
                 setIcon(player2, cells[i], i);
                 turn = true;
                 checkWinner(player2);
-                checkTurn();
             }
-            check();
+
+            checkTurn();
+            saveGameData();
 
         } else {
-            alert('choose empty cells');
+            alert('Choose an empty cell');
         }
     });
+
 };
 
 window.addEventListener('DOMContentLoaded', loadGameData);
