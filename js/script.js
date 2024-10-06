@@ -12,11 +12,13 @@ const clickSound = document.getElementById('clickSound');
 const winSound = document.getElementById('winSound');
 const drawSound = document.getElementById('drawSound');
 
-let turn = true; // true for Player 1, false for Player 2
-let useCells = []; // Array to keep track of used cells
-let winner = false; // Flag to check if there's a winner
-let ties = 0; // Number of ties
-let checkwin = 0; // Not used in this code
+let turn = true;
+let useCells = []; 
+let winner = false; 
+let ties = 0;
+let timer;
+let timerInterval;
+const progressBar = document.querySelector('.progress-bar');
 
 // Array of winning combinations for a 5x5 Tic-Tac-Toe board
 const winningCombos = [
@@ -36,17 +38,57 @@ const winningCombos = [
 
 let player1 = {
     icon: '<i class="fa-solid fa-xmark player1-color">',
-    played: [], // Array to keep track of cells played by Player 1
-    score: 0 // Score of Player 1
+    played: [], 
+    score: 0 
 };
 
 let player2 = {
     icon: '<i class="fa-regular fa-circle player2-color"></i>',
-    played: [], // Array to keep track of cells played by Player 2
-    score: 0 // Score of Player 2
+    played: [], 
+    score: 0 
 };
 
 checkTurn();
+
+/**
+ * Starts the turn timer with animation and updates the progress bar.
+ */
+function startTurnTimer() {
+    clearTimeout(timer);
+    clearInterval(timerInterval);
+    const turnElement = document.querySelector('.turn');
+    turnElement.classList.remove('animate-turn');
+    void turnElement.offsetWidth; // Force reflow to restart the animation
+    turnElement.classList.add('animate-turn');
+    
+    let timeLeft = 100; // 100% of the progress bar
+    progressBar.style.width = '100%';
+
+    timerInterval = setInterval(() => {
+        timeLeft -= 1;
+        progressBar.style.width = `${timeLeft}%`;
+
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            switchTurn();
+        }
+    }, 60); 
+
+    timer = setTimeout(() => {
+        switchTurn();
+    }, 6000); 
+}
+
+/**
+ * Switches the turn to the other player and restarts the timer.
+ */
+function switchTurn() {
+    clearTimeout(timer);
+    clearInterval(timerInterval);
+    turn = !turn;
+    checkTurn();
+    startTurnTimer();
+}
 
 /**
  * Saves the current game state to localStorage.
@@ -93,14 +135,12 @@ function loadGameData() {
 
         showScore();
         checkTurn();
+        startTurnTimer();
     }
 }
 
 /**
  * Sets the icon for the current player on the clicked cell and updates the game state.
- * @param {Object} player - The current player object (player1 or player2).
- * @param {HTMLElement} cell - The clicked cell element.
- * @param {number} index - The index of the clicked cell.
  */
 function setIcon(player, cell, index) {
     cell.innerHTML = player.icon;
@@ -116,11 +156,12 @@ function setIcon(player, cell, index) {
     clickSound.play();
 
     saveGameData();
+    checkWinner(player);
+    checkTurn();
 }
 
 /**
  * Checks if the current player has won or if the game is a draw.
- * @param {Object} player - The current player object (player1 or player2).
  */
 function checkWinner(player) {
     if (!winner) {
@@ -152,8 +193,6 @@ function checkWinner(player) {
 
 /**
  * Checks if a cell is empty (not yet used).
- * @param {number} i - The index of the cell.
- * @returns {boolean} - Returns true if the cell is empty, otherwise false.
  */
 function isEmpty(i) {
     return !useCells.includes(i);
@@ -174,6 +213,7 @@ function reset() {
     turn = true;
     checkTurn();
     saveGameData();
+    startTurnTimer();
 }
 
 /**
@@ -198,8 +238,6 @@ function showScore() {
 
 /**
  * Displays a message when a player wins or if there is a draw.
- * @param {Object|null} player - The winning player object or null in case of a draw.
- * @param {boolean} isDraw - Indicates if the game ended in a draw.
  */
 function displayMessage(player, isDraw = false) {
     overlay.style.display = 'flex';
@@ -245,6 +283,7 @@ for (let i = 0; i < cells.length; i++) {
                 turn = true;
                 checkWinner(player2);
             }
+            startTurnTimer();
             checkTurn();
             saveGameData();
         }

@@ -93,42 +93,42 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     background-color: var(--slate);
     width: 80px;
-    height: 25px;
+    height: 32px;
     font-weight: var(--fw-700);
     font-size: var(--fs-2);
     text-align: center;
     border-radius: 8px;
-    padding: 8px;
+    padding: 6px;
     box-shadow: var(--shadow-1);
     position: relative;
     overflow: hidden;
 }
 
-.turn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 3px;
-    background-color: var(--green); 
-    width: 100%;
-    animation: timeOut 10s linear 1 forwards; 
+.turn-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
 }
 
-.animate-turn::before {
-    animation: timeOut 10s linear 1 forwards;
+.turn-timer {
+  width: 100%;
+  height: 8px;
+  margin-top: 4px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  position: relative;
 }
 
-
-@keyframes timeOut {
-    0% {
-        width: 100%; 
-    }
-    100% {
-        width: 0%; 
-    }
+.progress-bar {
+  height: 100%;
+  width: 0;
+  border-radius: 10px;
+  background-color: #00eb3f;
+  transition: width 0.1s linear;
 }
 
 .current-turn {
@@ -283,3 +283,4 @@ body {
 .icon-animation {
     animation: pop 0.3s ease;
 }
+
